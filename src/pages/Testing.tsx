@@ -10,6 +10,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sh
 import { FlaskConical, BookOpen, Calculator, Plus, Trophy, Clock, CheckCircle } from 'lucide-react'
 import { TestPlanner } from '@/components/testing/TestPlanner'
 import { SignificanceCalculator } from '@/components/testing/SignificanceCalculator'
+import { LearningLibrary } from '@/components/testing/LearningLibrary'
 import type { Test } from '@/types'
 
 export default function Testing() {
@@ -176,56 +177,7 @@ export default function Testing() {
         </TabsContent>
 
         <TabsContent value="learnings" className="space-y-6">
-          {learningsLoading ? (
-            <div className="space-y-4">
-              {[1, 2].map((i) => (
-                <div key={i} className="h-24 animate-pulse rounded-lg bg-muted" />
-              ))}
-            </div>
-          ) : learnings.length === 0 ? (
-            <Card className="p-12 text-center">
-              <BookOpen className="mx-auto h-12 w-12 text-muted-foreground" />
-              <h3 className="mt-4 text-lg font-semibold">No learnings yet</h3>
-              <p className="mt-2 text-muted-foreground">
-                Document your insights from tests and campaigns.
-              </p>
-            </Card>
-          ) : (
-            <div className="space-y-4">
-              {learnings.map((learning) => (
-                <Card key={learning.id}>
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <h4 className="font-semibold">{learning.title}</h4>
-                          <Badge variant={
-                            learning.impactLevel === 'high' ? 'default' :
-                            learning.impactLevel === 'medium' ? 'secondary' : 'outline'
-                          }>
-                            {learning.impactLevel} impact
-                          </Badge>
-                        </div>
-                        <p className="text-sm text-muted-foreground mt-2">
-                          {learning.description}
-                        </p>
-                      </div>
-                      <Badge variant="outline">{learning.category}</Badge>
-                    </div>
-                    {learning.tags.length > 0 && (
-                      <div className="mt-3 flex gap-1">
-                        {learning.tags.map((tag, i) => (
-                          <Badge key={i} variant="secondary" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
+          <LearningLibrary />
         </TabsContent>
       </Tabs>
 
